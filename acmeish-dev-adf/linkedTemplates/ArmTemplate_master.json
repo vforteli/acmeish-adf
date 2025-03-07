@@ -9,7 +9,7 @@
 		},
 		"acmeish_dev_kv_properties_typeProperties_baseUrl": {
 			"type": "string",
-			"defaultValue": "https://acmeish-dev-kv.vault.azure.net/"
+			"defaultValue": "https://@{linkedService().kvname}.vault.azure.net/"
 		},
 		"containerUri": {
 			"type": "string",

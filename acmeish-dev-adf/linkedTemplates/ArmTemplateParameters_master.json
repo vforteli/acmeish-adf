@@ -6,7 +6,7 @@
 			"value": "acmeish-dev-adf"
 		},
 		"acmeish_dev_kv_properties_typeProperties_baseUrl": {
-			"value": "https://acmeish-dev-kv.vault.azure.net/"
+			"value": "https://@{linkedService().kvname}.vault.azure.net/"
 		},
 		"containerUri": {
 			"value": ""

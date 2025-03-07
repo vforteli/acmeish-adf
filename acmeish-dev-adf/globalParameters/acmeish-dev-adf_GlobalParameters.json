@@ -1,1 +1,6 @@
-{}
+{
+	"kv_url": {
+		"type": "string",
+		"value": "https://acmeish-dev-kv.vault.azure.net/"
+	}
+}
