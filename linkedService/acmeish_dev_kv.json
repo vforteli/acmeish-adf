@@ -9,7 +9,7 @@
 		"annotations": [],
 		"type": "AzureKeyVault",
 		"typeProperties": {
-			"baseUrl": "@{https://linkedService().kvname.vault.azure.net/}"
+			"baseUrl": "https://@{linkedService().kvname}.vault.azure.net/"
 		}
 	}
 }
