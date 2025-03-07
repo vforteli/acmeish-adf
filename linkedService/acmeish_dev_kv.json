@@ -3,8 +3,7 @@
 	"properties": {
 		"parameters": {
 			"kvname": {
-				"type": "string",
-				"defaultValue": "@globalParameters('kv_url')"
+				"type": "string"
 			}
 		},
 		"annotations": [],
