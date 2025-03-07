@@ -9,7 +9,7 @@
 		},
 		"acmeish_dev_kv_properties_typeProperties_baseUrl": {
 			"type": "string",
-			"defaultValue": "https://@{linkedService().kvname}.vault.azure.net/"
+			"defaultValue": "https://acmeish-dev-kv.vault.azure.net/"
 		}
 	},
 	"variables": {
@@ -21,11 +21,6 @@
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"parameters": {
-					"kvname": {
-						"type": "string"
-					}
-				},
 				"annotations": [],
 				"type": "AzureKeyVault",
 				"typeProperties": {
