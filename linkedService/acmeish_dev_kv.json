@@ -1,15 +1,10 @@
 {
 	"name": "acmeish_dev_kv",
 	"properties": {
-		"parameters": {
-			"kvname": {
-				"type": "string"
-			}
-		},
 		"annotations": [],
 		"type": "AzureKeyVault",
 		"typeProperties": {
-			"baseUrl": "https://@{linkedService().kvname}.vault.azure.net/"
+			"baseUrl": "https://acmeish-dev-kv.vault.azure.net/"
 		}
 	}
 }
