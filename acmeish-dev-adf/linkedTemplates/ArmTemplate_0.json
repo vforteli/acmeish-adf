@@ -10,6 +10,10 @@
 		"acmeish_dev_kv_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://acmeish-dev-kv.vault.azure.net/"
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://acmeishdevsa.dfs.core.windows.net/"
 		}
 	},
 	"variables": {
@@ -25,6 +29,19 @@
 				"type": "AzureKeyVault",
 				"typeProperties": {
 					"baseUrl": "[parameters('acmeish_dev_kv_properties_typeProperties_baseUrl')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureDataLakeStorage1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]"
 				}
 			},
 			"dependsOn": []

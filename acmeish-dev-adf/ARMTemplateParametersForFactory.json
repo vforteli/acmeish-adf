@@ -7,6 +7,9 @@
 		},
 		"acmeish_dev_kv_properties_typeProperties_baseUrl": {
 			"value": "https://acmeish-dev-kv.vault.azure.net/"
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://acmeishdevsa.dfs.core.windows.net/"
 		}
 	}
 }

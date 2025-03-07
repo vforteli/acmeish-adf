@@ -11,6 +11,10 @@
 			"type": "string",
 			"defaultValue": "https://acmeish-dev-kv.vault.azure.net/"
 		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://acmeishdevsa.dfs.core.windows.net/"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -40,6 +44,9 @@
 					},
 					"acmeish_dev_kv_properties_typeProperties_baseUrl": {
 						"value": "[parameters('acmeish_dev_kv_properties_typeProperties_baseUrl')]"
+					},
+					"AzureDataLakeStorage1_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]"
 					}
 				}
 			},
