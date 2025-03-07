@@ -1,6 +1,11 @@
 {
 	"name": "acmeish_dev_kv",
 	"properties": {
+		"parameters": {
+			"kvname": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "AzureKeyVault",
 		"typeProperties": {
