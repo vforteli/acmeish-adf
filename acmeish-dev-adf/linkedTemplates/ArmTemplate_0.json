@@ -60,6 +60,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
+						"fileName": "*.json",
 						"fileSystem": "landing"
 					}
 				},
