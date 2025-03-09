@@ -21,7 +21,7 @@
 							"type": "AzureBlobFSReadSettings",
 							"recursive": true,
 							"wildcardFolderPath": "*",
-							"wildcardFileName": "*",
+							"wildcardFileName": "*.json",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
