@@ -18,7 +18,7 @@
 					"notebookPath": "/Shared/stuff/dostuff",
 					"baseParameters": {
 						"some_param": {
-							"value": "@pipeline().parameters.some_env_value",
+							"value": "@concat('hello from: ', pipeline().globalParameters.env_name)",
 							"type": "Expression"
 						}
 					}
@@ -29,12 +29,6 @@
 				}
 			}
 		],
-		"parameters": {
-			"some_env_value": {
-				"type": "string",
-				"defaultValue": "hello from dev"
-			}
-		},
 		"annotations": []
 	}
 }
