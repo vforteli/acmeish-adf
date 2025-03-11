@@ -10,6 +10,12 @@
     },
     "AzureDataLakeStorage1_properties_typeProperties_url": {
       "value": "https://acmeishprodsa.dfs.core.windows.net/"
+    },
+    "default_properties_kv_url_value": {
+      "value": "https://acmeish-prod-kv.vault.azure.net/"
+    },
+    "default_properties_env_name_value": {
+      "value": "prod"
     }
   }
 }
