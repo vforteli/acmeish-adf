@@ -8,8 +8,17 @@
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
 			"value": "https://acmeishdevsa.dfs.core.windows.net/"
 		},
+		"AzureDatabricks1_properties_typeProperties_existingClusterId": {
+			"value": "0306-130525-qhy6av4e"
+		},
 		"acmeish_dev_kv_properties_typeProperties_baseUrl": {
 			"value": "https://acmeish-dev-kv.vault.azure.net/"
+		},
+		"default_properties_kv_url_value": {
+			"value": "https://acmeish-dev-kv.vault.azure.net/"
+		},
+		"default_properties_env_name_value": {
+			"value": "dev"
 		},
 		"containerUri": {
 			"value": ""

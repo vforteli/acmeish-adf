@@ -11,9 +11,21 @@
 			"type": "string",
 			"defaultValue": "https://acmeishdevsa.dfs.core.windows.net/"
 		},
+		"AzureDatabricks1_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "0306-130525-qhy6av4e"
+		},
 		"acmeish_dev_kv_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://acmeish-dev-kv.vault.azure.net/"
+		},
+		"default_properties_kv_url_value": {
+			"type": "string",
+			"defaultValue": "https://acmeish-dev-kv.vault.azure.net/"
+		},
+		"default_properties_env_name_value": {
+			"type": "string",
+			"defaultValue": "dev"
 		},
 		"containerUri": {
 			"type": "string",
@@ -42,8 +54,17 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"default_properties_kv_url_value": {
+						"value": "[parameters('default_properties_kv_url_value')]"
+					},
+					"default_properties_env_name_value": {
+						"value": "[parameters('default_properties_env_name_value')]"
+					},
 					"AzureDataLakeStorage1_properties_typeProperties_url": {
 						"value": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]"
+					},
+					"AzureDatabricks1_properties_typeProperties_existingClusterId": {
+						"value": "[parameters('AzureDatabricks1_properties_typeProperties_existingClusterId')]"
 					},
 					"acmeish_dev_kv_properties_typeProperties_baseUrl": {
 						"value": "[parameters('acmeish_dev_kv_properties_typeProperties_baseUrl')]"

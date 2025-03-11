@@ -2,5 +2,9 @@
 	"kv_url": {
 		"type": "string",
 		"value": "https://acmeish-dev-kv.vault.azure.net/"
+	},
+	"env_name": {
+		"type": "string",
+		"value": "dev"
 	}
 }
