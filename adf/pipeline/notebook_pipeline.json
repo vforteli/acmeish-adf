@@ -15,7 +15,10 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/Shared/stuff/dostuff"
+					"notebookPath": "/Shared/stuff/dostuff",
+					"baseParameters": {
+						"some_param": "look! a value!"
+					}
 				},
 				"linkedServiceName": {
 					"referenceName": "AzureDatabricks1",
