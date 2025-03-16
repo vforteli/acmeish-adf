@@ -38,6 +38,8 @@ jobs:
             build/ExportedArmTemplate
 
   deploy:
+    concurrency:
+      group: deploy-adf-group
     runs-on: ubuntu-latest
     needs: build
     if: github.ref == 'refs/heads/main'
@@ -70,10 +72,11 @@ jobs:
             -ArmTemplate ./adf_publish/ARMTemplateForFactory.json `
             -ArmTemplateParameters ./deploy/parameters/parameters-prod.json `
             -ResourceGroupName $rg `
+            -ExplicitStopTriggerList "eventtrigger" `
             -DataFactoryName $adfname -predeployment $true -deleteDeployment $false
 
 
-            az stack group create `
+          az stack group create `
             --name $adfname `
             --resource-group $rg `
             --template-file './adf_publish/ARMTemplateForFactory.json' `
