@@ -61,7 +61,7 @@
 							"typeProperties": {
 								"variableName": "lolwat",
 								"value": {
-									"value": "@item().item",
+									"value": "@item()",
 									"type": "Expression"
 								}
 							}
