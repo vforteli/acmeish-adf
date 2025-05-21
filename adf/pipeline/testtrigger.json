@@ -33,6 +33,7 @@
 				}
 			}
 		],
+		"concurrency": 1,
 		"variables": {
 			"foo": {
 				"type": "String"
