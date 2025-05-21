@@ -1,0 +1,43 @@
+{
+	"name": "testtrigger",
+	"properties": {
+		"activities": [
+			{
+				"name": "Wait60",
+				"type": "Wait",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"waitTimeInSeconds": 60
+				}
+			},
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Wait60",
+						"dependencyConditions": [
+							"Skipped"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "foo",
+					"value": "bar"
+				}
+			}
+		],
+		"variables": {
+			"foo": {
+				"type": "String"
+			}
+		},
+		"annotations": []
+	}
+}
