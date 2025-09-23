@@ -7,7 +7,18 @@
 			"domain": "https://adb-3793429365020291.11.azuredatabricks.net",
 			"authentication": "MSI",
 			"workspaceResourceId": "/subscriptions/ed5190ab-ab51-4f01-8a86-4825c1d7f284/resourceGroups/databricks-test-rg/providers/Microsoft.Databricks/workspaces/acme-bricks-inc",
-			"existingClusterId": "0306-130525-qhy6av4e"
+			"newClusterNodeType": "Standard_DS3_v2",
+			"newClusterNumOfWorker": "1",
+			"newClusterSparkConf": {
+				"fs.adl.oauth2.credential": "somesecret",
+				"fs.adl.oauth2.client.id": "someid"
+			},
+			"newClusterSparkEnvVars": {
+				"PYSPARK_PYTHON": "/databricks/python3/bin/python3"
+			},
+			"newClusterVersion": "15.4.x-cpu-ml-scala2.12",
+			"clusterOption": "Fixed",
+			"newClusterInitScripts": []
 		}
 	}
 }
