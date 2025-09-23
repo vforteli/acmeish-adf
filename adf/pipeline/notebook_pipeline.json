@@ -15,7 +15,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/Shared/stuff/dostuff",
+					"notebookPath": "/Shared/testingsparkconf",
 					"baseParameters": {
 						"some_param": {
 							"value": "@concat('hello from: ', pipeline().globalParameters.env_name)",
