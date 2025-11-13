@@ -17,9 +17,14 @@
 				"typeProperties": {
 					"dataset": {
 						"referenceName": "bricks_source",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"file_path": "/"
+						}
 					},
-					"fieldList": [],
+					"fieldList": [
+						"childItems"
+					],
 					"storeSettings": {
 						"type": "AzureBlobFSReadSettings",
 						"enablePartitionDiscovery": false
