@@ -40,7 +40,10 @@
 						"referenceName": "repeish_source",
 						"type": "DatasetReference",
 						"parameters": {
-							"file_path": "somefile.txt"
+							"file_path": {
+								"value": "@pipeline().parameters.source_file_path",
+								"type": "Expression"
+							}
 						}
 					}
 				],
@@ -52,6 +55,11 @@
 				]
 			}
 		],
+		"parameters": {
+			"source_file_path": {
+				"type": "string"
+			}
+		},
 		"folder": {
 			"name": "repeish"
 		},
