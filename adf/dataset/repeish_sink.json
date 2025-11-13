@@ -6,14 +6,14 @@
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "repeish"
+			"name": "repeish/acme"
 		},
 		"annotations": [],
 		"type": "Binary",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"folderPath": "in",
+				"folderPath": "in/acme",
 				"fileSystem": "repeish"
 			}
 		}

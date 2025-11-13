@@ -11,7 +11,7 @@
 			}
 		},
 		"folder": {
-			"name": "repeish"
+			"name": "repeish/acme"
 		},
 		"annotations": [],
 		"type": "Binary",
@@ -22,7 +22,7 @@
 					"value": "@dataset().file_path",
 					"type": "Expression"
 				},
-				"folderPath": "out_archive",
+				"folderPath": "out/acme_archive",
 				"fileSystem": "repeish"
 			}
 		}
