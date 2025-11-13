@@ -5,6 +5,11 @@
 			"referenceName": "AzureDataLakeStorage1",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"file_path": {
+				"type": "string"
+			}
+		},
 		"folder": {
 			"name": "repeish"
 		},
@@ -13,6 +18,10 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().file_path",
+					"type": "Expression"
+				},
 				"folderPath": "in",
 				"fileSystem": "repish"
 			}
