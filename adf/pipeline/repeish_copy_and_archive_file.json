@@ -42,7 +42,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"file_path": {
-								"value": "@pipeline().parameters.source_file_path",
+								"value": "@pipeline().parameters.source_file_name",
 								"type": "Expression"
 							}
 						}
@@ -100,7 +100,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"file_path": {
-								"value": "@pipeline().parameters.source_file_path",
+								"value": "@pipeline().parameters.source_file_name",
 								"type": "Expression"
 							}
 						}
@@ -112,7 +112,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"file_path": {
-								"value": "@concat(utcNow('yyyyMMddHHmm'), '_', pipeline().parameters.source_file_path)",
+								"value": "@concat(utcNow('yyyyMMddHHmm'), '_', pipeline().parameters.source_file_name)",
 								"type": "Expression"
 							}
 						}
