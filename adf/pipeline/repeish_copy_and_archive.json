@@ -53,6 +53,69 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Copy to archive",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Copy data to sink",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "BinarySource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true
+						},
+						"formatSettings": {
+							"type": "BinaryReadSettings"
+						}
+					},
+					"sink": {
+						"type": "BinarySink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "repeish_source",
+						"type": "DatasetReference",
+						"parameters": {
+							"file_path": {
+								"value": "@pipeline().parameters.source_file_path",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "repeish_source",
+						"type": "DatasetReference",
+						"parameters": {
+							"file_path": {
+								"value": "@concat('archive/', pipeline().parameters.source_file_path)",
+								"type": "Expression"
+							}
+						}
+					}
+				]
 			}
 		],
 		"parameters": {
