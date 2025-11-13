@@ -121,9 +121,12 @@
 			}
 		],
 		"parameters": {
-			"source_file_path": {
+			"source_file_name": {
 				"type": "string",
 				"defaultValue": "somefile.txt"
+			},
+			"source_file_path": {
+				"type": "string"
 			}
 		},
 		"folder": {
