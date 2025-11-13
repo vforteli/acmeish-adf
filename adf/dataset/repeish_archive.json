@@ -1,9 +1,14 @@
 {
-	"name": "repeish_sink",
+	"name": "repeish_archive",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureDataLakeStorage1",
 			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"file_path": {
+				"type": "string"
+			}
 		},
 		"folder": {
 			"name": "repeish"
@@ -13,7 +18,11 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"folderPath": "in",
+				"fileName": {
+					"value": "@dataset().file_path",
+					"type": "Expression"
+				},
+				"folderPath": "out_archive",
 				"fileSystem": "repeish"
 			}
 		}

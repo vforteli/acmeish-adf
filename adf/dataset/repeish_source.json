@@ -22,7 +22,7 @@
 					"value": "@dataset().file_path",
 					"type": "Expression"
 				},
-				"folderPath": "in",
+				"folderPath": "out",
 				"fileSystem": "repeish"
 			}
 		}
