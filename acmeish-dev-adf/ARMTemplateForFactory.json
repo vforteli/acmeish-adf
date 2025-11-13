@@ -719,7 +719,7 @@
 				],
 				"type": "BlobEventsTrigger",
 				"typeProperties": {
-					"blobPathBeginsWith": "/repeish/blobs/in/",
+					"blobPathBeginsWith": "/repeish/blobs/out/",
 					"blobPathEndsWith": ".txt",
 					"ignoreEmptyBlobs": true,
 					"scope": "[parameters('repeish_in_file_properties_typeProperties_scope')]",
