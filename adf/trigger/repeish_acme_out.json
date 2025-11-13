@@ -1,5 +1,5 @@
 {
-	"name": "repeish_in_file",
+	"name": "repeish_acme_out",
 	"properties": {
 		"annotations": [],
 		"runtimeState": "Started",
@@ -10,14 +10,13 @@
 					"type": "PipelineReference"
 				},
 				"parameters": {
-					"source_file_name": "@triggerBody().fileName",
-					"source_file_path": "@triggerBody().folderPath"
+					"source_file_name": "@triggerBody().fileName"
 				}
 			}
 		],
 		"type": "BlobEventsTrigger",
 		"typeProperties": {
-			"blobPathBeginsWith": "/repeish/blobs/out/",
+			"blobPathBeginsWith": "/repeish/blobs/out/acme",
 			"blobPathEndsWith": ".txt",
 			"ignoreEmptyBlobs": true,
 			"scope": "/subscriptions/ed5190ab-ab51-4f01-8a86-4825c1d7f284/resourceGroups/acme-adftest-rg/providers/Microsoft.Storage/storageAccounts/acmeishdevsa",
