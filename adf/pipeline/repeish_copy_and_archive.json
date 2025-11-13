@@ -1,0 +1,9 @@
+{
+	"name": "repeish_copy_and_archive",
+	"properties": {
+		"folder": {
+			"name": "repeish"
+		},
+		"annotations": []
+	}
+}
