@@ -6,7 +6,7 @@
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "repetest"
+			"name": "repeish"
 		},
 		"annotations": [],
 		"type": "Binary",
