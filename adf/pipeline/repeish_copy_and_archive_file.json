@@ -125,7 +125,7 @@
 				"type": "string",
 				"defaultValue": "somefile.txt"
 			},
-			"source_file_path": {
+			"source_folder_path": {
 				"type": "string"
 			}
 		},
