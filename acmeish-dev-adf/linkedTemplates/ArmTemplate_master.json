@@ -11,15 +11,15 @@
 			"type": "string",
 			"defaultValue": "https://acmeishdevsa.dfs.core.windows.net/"
 		},
-		"AzureDatabricks1_properties_typeProperties_existingClusterId": {
-			"type": "string",
-			"defaultValue": "0306-130525-qhy6av4e"
-		},
 		"acmeish_dev_kv_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://acmeish-dev-kv.vault.azure.net/"
 		},
 		"eventtrigger_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/ed5190ab-ab51-4f01-8a86-4825c1d7f284/resourceGroups/acme-adftest-rg/providers/Microsoft.Storage/storageAccounts/acmeishdevsa"
+		},
+		"repeish_in_file_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/ed5190ab-ab51-4f01-8a86-4825c1d7f284/resourceGroups/acme-adftest-rg/providers/Microsoft.Storage/storageAccounts/acmeishdevsa"
 		},
@@ -67,14 +67,14 @@
 					"AzureDataLakeStorage1_properties_typeProperties_url": {
 						"value": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]"
 					},
-					"AzureDatabricks1_properties_typeProperties_existingClusterId": {
-						"value": "[parameters('AzureDatabricks1_properties_typeProperties_existingClusterId')]"
-					},
 					"acmeish_dev_kv_properties_typeProperties_baseUrl": {
 						"value": "[parameters('acmeish_dev_kv_properties_typeProperties_baseUrl')]"
 					},
 					"eventtrigger_properties_typeProperties_scope": {
 						"value": "[parameters('eventtrigger_properties_typeProperties_scope')]"
+					},
+					"repeish_in_file_properties_typeProperties_scope": {
+						"value": "[parameters('repeish_in_file_properties_typeProperties_scope')]"
 					}
 				}
 			},
