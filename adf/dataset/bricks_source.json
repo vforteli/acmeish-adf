@@ -1,0 +1,30 @@
+{
+	"name": "bricks_source",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"file_path": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "repeish/bricks"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().file_path",
+					"type": "Expression"
+				},
+				"folderPath": "out/acme",
+				"fileSystem": "repeish"
+			}
+		}
+	}
+}
