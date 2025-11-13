@@ -8,6 +8,9 @@
 				"pipelineReference": {
 					"referenceName": "repeish_copy_and_archive_file",
 					"type": "PipelineReference"
+				},
+				"parameters": {
+					"source_file_path": "@triggerBody().fileName"
 				}
 			}
 		],
