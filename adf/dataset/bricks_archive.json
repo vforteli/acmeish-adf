@@ -22,7 +22,7 @@
 					"value": "@dataset().file_path",
 					"type": "Expression"
 				},
-				"folderPath": "out/acme_archive",
+				"folderPath": "out/bricks_archive",
 				"fileSystem": "repeish"
 			}
 		}
