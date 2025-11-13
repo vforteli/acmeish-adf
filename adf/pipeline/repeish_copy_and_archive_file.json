@@ -1,5 +1,5 @@
 {
-	"name": "repeish_copy_and_archive",
+	"name": "repeish_copy_and_archive_file",
 	"properties": {
 		"description": "This pipeline is used for copying single files in a flat hierarchy",
 		"activities": [
