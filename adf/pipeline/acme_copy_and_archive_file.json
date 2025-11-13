@@ -1,5 +1,5 @@
 {
-	"name": "repeish_copy_and_archive_file",
+	"name": "acme_copy_and_archive_file",
 	"properties": {
 		"description": "This pipeline is used for copying single files in a flat hierarchy",
 		"activities": [
@@ -14,7 +14,16 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": [],
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "repeish/out/acme/@{pipeline().parameters.source_file_name}"
+					},
+					{
+						"name": "Destination",
+						"value": "repeish/in/acme/"
+					}
+				],
 				"typeProperties": {
 					"source": {
 						"type": "BinarySource",
@@ -73,7 +82,16 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": [],
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "repeish/out/acme/@{pipeline().parameters.source_file_name}"
+					},
+					{
+						"name": "Destination",
+						"value": "repeish/out/acme_archive/@{concat(utcNow('yyyyMMddHHmm'), '_', pipeline().parameters.source_file_name)}"
+					}
+				],
 				"typeProperties": {
 					"source": {
 						"type": "BinarySource",

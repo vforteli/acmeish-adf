@@ -6,7 +6,7 @@
 		"pipelines": [
 			{
 				"pipelineReference": {
-					"referenceName": "repeish_copy_and_archive_file",
+					"referenceName": "acme_copy_and_archive_file",
 					"type": "PipelineReference"
 				},
 				"parameters": {

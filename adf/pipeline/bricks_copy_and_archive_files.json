@@ -14,7 +14,16 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": [],
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "repeish/out/bricks/@{pipeline().parameters.source_file_name}"
+					},
+					{
+						"name": "Destination",
+						"value": "repeish/in/bricks/"
+					}
+				],
 				"typeProperties": {
 					"source": {
 						"type": "BinarySource",
@@ -70,7 +79,16 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": [],
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "repeish/out/bricks/@{pipeline().parameters.source_file_name}"
+					},
+					{
+						"name": "Destination",
+						"value": "repeish/out/bricks_archive/@{concat(utcNow('yyyyMMddHHmm'), '_', pipeline().parameters.source_file_name)}"
+					}
+				],
 				"typeProperties": {
 					"source": {
 						"type": "BinarySource",
