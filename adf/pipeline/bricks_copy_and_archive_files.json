@@ -103,7 +103,10 @@
 				"outputs": [
 					{
 						"referenceName": "bricks_archive",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"file_path": "@concat(utcNow('yyyyMMddHHmm'), '_', pipeline().parameters.source_file_name)"
+						}
 					}
 				]
 			}
