@@ -39,7 +39,10 @@
 				"inputs": [
 					{
 						"referenceName": "bricks_source",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"file_path": "@pipeline().parameters.source_file_name"
+						}
 					}
 				],
 				"outputs": [
@@ -91,7 +94,10 @@
 				"inputs": [
 					{
 						"referenceName": "bricks_source",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"file_path": "@pipeline().parameters.source_file_name"
+						}
 					}
 				],
 				"outputs": [
