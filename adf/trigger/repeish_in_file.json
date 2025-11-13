@@ -1,0 +1,25 @@
+{
+	"name": "repeish_in_file",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "repeish_copy_and_archive_file",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/repeish/blobs/in/",
+			"blobPathEndsWith": ".txt",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/ed5190ab-ab51-4f01-8a86-4825c1d7f284/resourceGroups/acme-adftest-rg/providers/Microsoft.Storage/storageAccounts/acmeishdevsa",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}
