@@ -73,6 +73,24 @@
 					},
 					"acmeish_dev_kv_properties_typeProperties_baseUrl": {
 						"value": "[parameters('acmeish_dev_kv_properties_typeProperties_baseUrl')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "acmeish-dev-adf_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
 					},
 					"eventtrigger_properties_typeProperties_scope": {
 						"value": "[parameters('eventtrigger_properties_typeProperties_scope')]"
@@ -85,7 +103,9 @@
 					}
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'acmeish-dev-adf_ArmTemplate_0')]"
+			]
 		}
 	]
 }
