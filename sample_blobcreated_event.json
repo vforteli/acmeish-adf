@@ -1,0 +1,24 @@
+{
+  "topic": "/subscriptions/ed5190ab-ab51-4f01-8a86-4825c1d7f284/resourceGroups/acme-adftest-rg/providers/Microsoft.Storage/storageAccounts/acmeishdevsa",
+  "subject": "/blobServices/default/containers/repeish/blobs/out/somefile.txt",
+  "eventType": "Microsoft.Storage.BlobCreated",
+  "id": "ae8f97fc-accf-4229-95c1-0569d1365cbe",
+  "data": {
+    "api": "PutBlob",
+    "clientRequestId": "8793f783-4a62-45a5-62de-c714585df272",
+    "requestId": "7321fdcf-e01e-0047-2384-5410a2000000",
+    "eTag": "0x8DE229BD873CC34",
+    "contentType": "text/plain",
+    "contentLength": 5,
+    "blobType": "BlockBlob",
+    "accessTier": "Default",
+    "blobUrl": "https://acmeishdevsa.blob.core.windows.net/repeish/out/somefile.txt",
+    "url": "https://acmeishdevsa.blob.core.windows.net/repeish/out/somefile.txt",
+    "sequencer": "00000000000000000000000000011199000000000000e9ad",
+    "identity": "$superuser",
+    "storageDiagnostics": {"batchId": "1aae5cd2-9006-0000-0084-547bf9000000"}
+  },
+  "dataVersion": "",
+  "metadataVersion": "1",
+  "eventTime": "2025-11-13T10:03:07.994771Z"
+}
