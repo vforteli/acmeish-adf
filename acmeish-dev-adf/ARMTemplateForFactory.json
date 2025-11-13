@@ -19,7 +19,7 @@
 			"type": "string",
 			"defaultValue": "/subscriptions/ed5190ab-ab51-4f01-8a86-4825c1d7f284/resourceGroups/acme-adftest-rg/providers/Microsoft.Storage/storageAccounts/acmeishdevsa"
 		},
-		"repeish_acme_out_properties_repeish_copy_and_archive_file_parameters_source_file_name": {
+		"repeish_acme_out_properties_acme_copy_and_archive_file_parameters_source_file_name": {
 			"type": "string",
 			"defaultValue": "@triggerBody().fileName"
 		},
@@ -242,7 +242,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/repeish_copy_and_archive_file')]",
+			"name": "[concat(parameters('factoryName'), '/acme_copy_and_archive_file')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -259,7 +259,16 @@
 							"secureOutput": false,
 							"secureInput": false
 						},
-						"userProperties": [],
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "repeish/out/acme/@{pipeline().parameters.source_file_name}"
+							},
+							{
+								"name": "Destination",
+								"value": "repeish/in/acme/"
+							}
+						],
 						"typeProperties": {
 							"source": {
 								"type": "BinarySource",
@@ -319,7 +328,16 @@
 							"secureOutput": false,
 							"secureInput": false
 						},
-						"userProperties": [],
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "repeish/out/acme/@{pipeline().parameters.source_file_name}"
+							},
+							{
+								"name": "Destination",
+								"value": "repeish/out/acme_archive/@{concat(utcNow('yyyyMMddHHmm'), '_', pipeline().parameters.source_file_name)}"
+							}
+						],
 						"typeProperties": {
 							"source": {
 								"type": "BinarySource",
@@ -718,11 +736,11 @@
 				"pipelines": [
 					{
 						"pipelineReference": {
-							"referenceName": "repeish_copy_and_archive_file",
+							"referenceName": "acme_copy_and_archive_file",
 							"type": "PipelineReference"
 						},
 						"parameters": {
-							"source_file_name": "[parameters('repeish_acme_out_properties_repeish_copy_and_archive_file_parameters_source_file_name')]"
+							"source_file_name": "[parameters('repeish_acme_out_properties_acme_copy_and_archive_file_parameters_source_file_name')]"
 						}
 					}
 				],
@@ -738,7 +756,7 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/repeish_copy_and_archive_file')]"
+				"[concat(variables('factoryId'), '/pipelines/acme_copy_and_archive_file')]"
 			]
 		},
 		{
@@ -885,7 +903,16 @@
 							"secureOutput": false,
 							"secureInput": false
 						},
-						"userProperties": [],
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "repeish/out/bricks/@{pipeline().parameters.source_file_name}"
+							},
+							{
+								"name": "Destination",
+								"value": "repeish/in/bricks/"
+							}
+						],
 						"typeProperties": {
 							"source": {
 								"type": "BinarySource",
@@ -942,7 +969,16 @@
 							"secureOutput": false,
 							"secureInput": false
 						},
-						"userProperties": [],
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "repeish/out/bricks/@{pipeline().parameters.source_file_name}"
+							},
+							{
+								"name": "Destination",
+								"value": "repeish/out/bricks_archive/@{concat(utcNow('yyyyMMddHHmm'), '_', pipeline().parameters.source_file_name)}"
+							}
+						],
 						"typeProperties": {
 							"source": {
 								"type": "BinarySource",
@@ -1061,7 +1097,6 @@
 								"value": "@activity('List files').output.childItems",
 								"type": "Expression"
 							},
-							"isSequential": false,
 							"activities": [
 								{
 									"name": "Handle file",

@@ -661,7 +661,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/repeish_copy_and_archive_file')]",
+			"name": "[concat(parameters('factoryName'), '/acme_copy_and_archive_file')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -678,7 +678,16 @@
 							"secureOutput": false,
 							"secureInput": false
 						},
-						"userProperties": [],
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "repeish/out/acme/@{pipeline().parameters.source_file_name}"
+							},
+							{
+								"name": "Destination",
+								"value": "repeish/in/acme/"
+							}
+						],
 						"typeProperties": {
 							"source": {
 								"type": "BinarySource",
@@ -738,7 +747,16 @@
 							"secureOutput": false,
 							"secureInput": false
 						},
-						"userProperties": [],
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "repeish/out/acme/@{pipeline().parameters.source_file_name}"
+							},
+							{
+								"name": "Destination",
+								"value": "repeish/out/acme_archive/@{concat(utcNow('yyyyMMddHHmm'), '_', pipeline().parameters.source_file_name)}"
+							}
+						],
 						"typeProperties": {
 							"source": {
 								"type": "BinarySource",
