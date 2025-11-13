@@ -33,6 +33,49 @@
 						"type": "BinaryReadSettings"
 					}
 				}
+			},
+			{
+				"name": "Foreach file",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "List files",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('List files').output.childItems",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Handle file",
+							"type": "ExecutePipeline",
+							"dependsOn": [],
+							"policy": {
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "bricks_copy_and_archive_files",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true,
+								"parameters": {
+									"source_file_name": {
+										"value": "@item().name",
+										"type": "Expression"
+									}
+								}
+							}
+						}
+					]
+				}
 			}
 		],
 		"folder": {
