@@ -19,7 +19,11 @@
 			"type": "string",
 			"defaultValue": "/subscriptions/ed5190ab-ab51-4f01-8a86-4825c1d7f284/resourceGroups/acme-adftest-rg/providers/Microsoft.Storage/storageAccounts/acmeishdevsa"
 		},
-		"repeish_in_file_properties_typeProperties_scope": {
+		"repeish_acme_out_properties_repeish_copy_and_archive_file_parameters_source_file_name": {
+			"type": "string",
+			"defaultValue": "@triggerBody().fileName"
+		},
+		"repeish_acme_out_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/ed5190ab-ab51-4f01-8a86-4825c1d7f284/resourceGroups/acme-adftest-rg/providers/Microsoft.Storage/storageAccounts/acmeishdevsa"
 		},
@@ -283,7 +287,7 @@
 								"type": "DatasetReference",
 								"parameters": {
 									"file_path": {
-										"value": "@pipeline().parameters.source_file_path",
+										"value": "@pipeline().parameters.source_file_name",
 										"type": "Expression"
 									}
 								}
@@ -342,7 +346,7 @@
 								"type": "DatasetReference",
 								"parameters": {
 									"file_path": {
-										"value": "@pipeline().parameters.source_file_path",
+										"value": "@pipeline().parameters.source_file_name",
 										"type": "Expression"
 									}
 								}
@@ -354,7 +358,7 @@
 								"type": "DatasetReference",
 								"parameters": {
 									"file_path": {
-										"value": "@concat(utcNow('yyyyMMddHHmm'), '_', pipeline().parameters.source_file_path)",
+										"value": "@concat(utcNow('yyyyMMddHHmm'), '_', pipeline().parameters.source_file_name)",
 										"type": "Expression"
 									}
 								}
@@ -366,9 +370,12 @@
 					"elapsedTimeMetric": {}
 				},
 				"parameters": {
-					"source_file_path": {
+					"source_file_name": {
 						"type": "string",
 						"defaultValue": "somefile.txt"
+					},
+					"source_folder_path": {
+						"type": "string"
 					}
 				},
 				"folder": {
@@ -491,7 +498,7 @@
 					}
 				},
 				"folder": {
-					"name": "repeish"
+					"name": "repeish/acme"
 				},
 				"annotations": [],
 				"type": "Binary",
@@ -502,7 +509,7 @@
 							"value": "@dataset().file_path",
 							"type": "Expression"
 						},
-						"folderPath": "out_archive",
+						"folderPath": "out/acme_archive",
 						"fileSystem": "repeish"
 					}
 				}
@@ -521,14 +528,14 @@
 					"type": "LinkedServiceReference"
 				},
 				"folder": {
-					"name": "repeish"
+					"name": "repeish/acme"
 				},
 				"annotations": [],
 				"type": "Binary",
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"folderPath": "in",
+						"folderPath": "in/acme",
 						"fileSystem": "repeish"
 					}
 				}
@@ -552,7 +559,7 @@
 					}
 				},
 				"folder": {
-					"name": "repeish"
+					"name": "repeish/acme"
 				},
 				"annotations": [],
 				"type": "Binary",
@@ -563,7 +570,7 @@
 							"value": "@dataset().file_path",
 							"type": "Expression"
 						},
-						"folderPath": "out",
+						"folderPath": "out/acme",
 						"fileSystem": "repeish"
 					}
 				}
@@ -702,7 +709,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/repeish_in_file')]",
+			"name": "[concat(parameters('factoryName'), '/repeish_acme_out')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -714,15 +721,17 @@
 							"referenceName": "repeish_copy_and_archive_file",
 							"type": "PipelineReference"
 						},
-						"parameters": {}
+						"parameters": {
+							"source_file_name": "[parameters('repeish_acme_out_properties_repeish_copy_and_archive_file_parameters_source_file_name')]"
+						}
 					}
 				],
 				"type": "BlobEventsTrigger",
 				"typeProperties": {
-					"blobPathBeginsWith": "/repeish/blobs/out/",
+					"blobPathBeginsWith": "/repeish/blobs/out/acme/",
 					"blobPathEndsWith": ".txt",
 					"ignoreEmptyBlobs": true,
-					"scope": "[parameters('repeish_in_file_properties_typeProperties_scope')]",
+					"scope": "[parameters('repeish_acme_out_properties_typeProperties_scope')]",
 					"events": [
 						"Microsoft.Storage.BlobCreated"
 					]
