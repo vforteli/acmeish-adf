@@ -1,0 +1,270 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name"
+		},
+		"AzureDataLakeStorage1": {
+			"type": "string"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/acme_copy_and_archive_file')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "This pipeline is used for copying single files in a flat hierarchy",
+				"activities": [
+					{
+						"name": "Copy data to sink",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "repeish/out/acme/@{pipeline().parameters.source_file_name}"
+							},
+							{
+								"name": "Destination",
+								"value": "repeish/in/acme/"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "BinarySource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"deleteFilesAfterCompletion": false
+								},
+								"formatSettings": {
+									"type": "BinaryReadSettings"
+								}
+							},
+							"sink": {
+								"type": "BinarySink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings",
+									"copyBehavior": "PreserveHierarchy"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "repeish_source",
+								"type": "DatasetReference",
+								"parameters": {
+									"file_path": {
+										"value": "@pipeline().parameters.source_file_name",
+										"type": "Expression"
+									}
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "repeish_sink",
+								"type": "DatasetReference"
+							}
+						]
+					},
+					{
+						"name": "Move to archive",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Copy data to sink",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "repeish/out/acme/@{pipeline().parameters.source_file_name}"
+							},
+							{
+								"name": "Destination",
+								"value": "repeish/out/acme_archive/@{concat(utcNow('yyyyMMddHHmm'), '_', pipeline().parameters.source_file_name)}"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "BinarySource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"deleteFilesAfterCompletion": true
+								},
+								"formatSettings": {
+									"type": "BinaryReadSettings"
+								}
+							},
+							"sink": {
+								"type": "BinarySink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "repeish_source",
+								"type": "DatasetReference",
+								"parameters": {
+									"file_path": {
+										"value": "@pipeline().parameters.source_file_name",
+										"type": "Expression"
+									}
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "repeish_archive",
+								"type": "DatasetReference",
+								"parameters": {
+									"file_path": {
+										"value": "@concat(utcNow('yyyyMMddHHmm'), '_', pipeline().parameters.source_file_name)",
+										"type": "Expression"
+									}
+								}
+							}
+						]
+					}
+				],
+				"parameters": {
+					"source_file_name": {
+						"type": "string",
+						"defaultValue": "somefile.txt"
+					},
+					"source_folder_path": {
+						"type": "string"
+					}
+				},
+				"folder": {
+					"name": "repeish/acme"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/repeish_source')]",
+				"[concat(variables('factoryId'), '/datasets/repeish_sink')]",
+				"[concat(variables('factoryId'), '/datasets/repeish_archive')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/repeish_source')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "[parameters('AzureDataLakeStorage1')]",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"file_path": {
+						"type": "string"
+					}
+				},
+				"folder": {
+					"name": "repeish/acme"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().file_path",
+							"type": "Expression"
+						},
+						"folderPath": "out/acme",
+						"fileSystem": "repeish"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/repeish_sink')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "[parameters('AzureDataLakeStorage1')]",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "repeish/acme"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "in/acme",
+						"fileSystem": "repeish"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/repeish_archive')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "[parameters('AzureDataLakeStorage1')]",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"file_path": {
+						"type": "string"
+					}
+				},
+				"folder": {
+					"name": "repeish/acme"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().file_path",
+							"type": "Expression"
+						},
+						"folderPath": "out/acme_archive",
+						"fileSystem": "repeish"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
