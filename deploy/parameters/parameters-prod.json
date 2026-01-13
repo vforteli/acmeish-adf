@@ -8,9 +8,6 @@
     "AzureDataLakeStorage1_properties_typeProperties_url": {
       "value": "https://acmeishprodsa.dfs.core.windows.net/"
     },
-    "AzureDatabricks1_properties_typeProperties_existingClusterId": {
-      "value": "0306-130525-qhy6av4e"
-    },
     "acmeish_dev_kv_properties_typeProperties_baseUrl": {
       "value": "https://acmeish-prod-kv.vault.azure.net/"
     },
@@ -22,6 +19,12 @@
     },
     "default_properties_env_name_value": {
       "value": "prod"
+    },
+    "repeish_acme_out_properties_acme_copy_and_archive_file_parameters_source_file_name": {
+      "value": "@triggerBody().fileName"
+    },
+    "repeish_acme_out_properties_typeProperties_scope": {
+      "value": "/subscriptions/ed5190ab-ab51-4f01-8a86-4825c1d7f284/resourceGroups/acme-adftest-rg/providers/Microsoft.Storage/storageAccounts/acmeishprodsa"
     }
   }
 }
