@@ -1,24 +1,24 @@
 {
-  "name": "testtrigger",
-  "properties": {
-    "annotations": [],
-    "runtimeState": "Stopped",
-    "pipelines": [
-      {
-        "pipelineReference": {
-          "referenceName": "testtrigger",
-          "type": "PipelineReference"
-        }
-      }
-    ],
-    "type": "ScheduleTrigger",
-    "typeProperties": {
-      "recurrence": {
-        "frequency": "Minute",
-        "interval": 1,
-        "startTime": "2025-05-21T11:46:00",
-        "timeZone": "GTB Standard Time"
-      }
-    }
-  }
+	"name": "testtrigger",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "testtrigger",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Minute",
+				"interval": 1,
+				"startTime": "2025-05-21T11:46:00",
+				"timeZone": "GTB Standard Time"
+			}
+		}
+	}
 }
