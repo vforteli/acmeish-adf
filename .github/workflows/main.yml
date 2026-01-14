@@ -70,30 +70,30 @@ jobs:
           Connect-AzAccount -AccessToken $accessToken -TenantId ${{ secrets.AZURE_TENANT_ID }} -SubscriptionId ${{ secrets.AZURE_SUBSCRIPTION_ID }} -AccountId ${{ secrets.AZURE_CLIENT_ID }}
 
 
-          ./adf_publish/PrePostDeploymentScript.ps1 `
-            -ArmTemplate ./adf_publish/ARMTemplateForFactory.json `
-            -ArmTemplateParameters ./deploy/parameters/parameters-prod.json `
-            -ResourceGroupName $rg `
-            -DataFactoryName $adfname `
-            -predeployment $true `
-            -deleteDeployment $false
+          # ./adf_publish/PrePostDeploymentScript.ps1 `
+          #   -ArmTemplate ./adf_publish/ARMTemplateForFactory.json `
+          #   -ArmTemplateParameters ./deploy/parameters/parameters-prod.json `
+          #   -ResourceGroupName $rg `
+          #   -DataFactoryName $adfname `
+          #   -predeployment $true `
+          #   -deleteDeployment $false
 
-          Write-Host "Checking for triggers to stop..."
-          $names = az datafactory trigger list `
-              --factory-name $adfname `
-              --resource-group $rg `
-              --query "[?properties.runtimeState == 'Started'].name" `
-              -o tsv `
-              --only-show-errors
+          # Write-Host "Checking for triggers to stop..."
+          # $names = az datafactory trigger list `
+          #     --factory-name $adfname `
+          #     --resource-group $rg `
+          #     --query "[?properties.runtimeState == 'Started'].name" `
+          #     -o tsv `
+          #     --only-show-errors
 
-          foreach ($name in $names) {
-              Write-Host "Stopping trigger: $name"
-              az datafactory trigger stop `
-                  --factory-name $adfname `
-                  --resource-group $rg `
-                  --name $name `
-                  --only-show-errors
-          }
+          # foreach ($name in $names) {
+          #     Write-Host "Stopping trigger: $name"
+          #     az datafactory trigger stop `
+          #         --factory-name $adfname `
+          #         --resource-group $rg `
+          #         --name $name `
+          #         --only-show-errors
+          # }
 
           az stack group create `
             --name $adfname `
@@ -105,13 +105,13 @@ jobs:
             --yes
 
 
-          ./adf_publish/PrePostDeploymentScript.ps1 `
-            -ArmTemplate ./adf_publish/ARMTemplateForFactory.json `
-            -ArmTemplateParameters ./deploy/parameters/parameters-prod.json `
-            -ResourceGroupName $rg `
-            -DataFactoryName $adfname `
-            -predeployment $false `
-            -deleteDeployment $false
+          # ./adf_publish/PrePostDeploymentScript.ps1 `
+          #   -ArmTemplate ./adf_publish/ARMTemplateForFactory.json `
+          #   -ArmTemplateParameters ./deploy/parameters/parameters-prod.json `
+          #   -ResourceGroupName $rg `
+          #   -DataFactoryName $adfname `
+          #   -predeployment $false `
+          #   -deleteDeployment $false
 
           # Write-Host "Checking for triggers to start..."
           # $names = az datafactory trigger list `
