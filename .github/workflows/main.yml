@@ -74,7 +74,6 @@ jobs:
             -ArmTemplate ./adf_publish/ARMTemplateForFactory.json `
             -ArmTemplateParameters ./deploy/parameters/parameters-prod.json `
             -ResourceGroupName $rg `
-            -ExplicitStopTriggerList "eventtrigger, testtrigger" `
             -DataFactoryName $adfname `
             -predeployment $true `
             -deleteDeployment $false
