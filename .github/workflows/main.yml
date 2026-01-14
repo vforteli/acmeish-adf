@@ -78,22 +78,22 @@ jobs:
             -predeployment $true `
             -deleteDeployment $false
 
-          # Write-Host "Checking for triggers to stop..."
-          # $names = az datafactory trigger list `
-          #     --factory-name $adfname `
-          #     --resource-group $rg `
-          #     --query "[?properties.runtimeState == 'Started'].name" `
-          #     -o tsv `
-          #     --only-show-errors
+          Write-Host "Checking for triggers to stop..."
+          $names = az datafactory trigger list `
+              --factory-name $adfname `
+              --resource-group $rg `
+              --query "[?properties.runtimeState == 'Started'].name" `
+              -o tsv `
+              --only-show-errors
 
-          # foreach ($name in $names) {
-          #     Write-Host "Stopping trigger: $name"
-          #     az datafactory trigger stop `
-          #         --factory-name $adfname `
-          #         --resource-group $rg `
-          #         --name $name `
-          #         --only-show-errors
-          # }
+          foreach ($name in $names) {
+              Write-Host "Stopping trigger: $name"
+              az datafactory trigger stop `
+                  --factory-name $adfname `
+                  --resource-group $rg `
+                  --name $name `
+                  --only-show-errors
+          }
 
           az stack group create `
             --name $adfname `
