@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "List files",
+				"name": "List folders",
 				"type": "GetMetadata",
 				"dependsOn": [],
 				"policy": {
@@ -32,11 +32,11 @@
 				}
 			},
 			{
-				"name": "Foreach file",
+				"name": "Foreach folder",
 				"type": "ForEach",
 				"dependsOn": [
 					{
-						"activity": "List files",
+						"activity": "filter folders",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -66,6 +66,29 @@
 							}
 						}
 					]
+				}
+			},
+			{
+				"name": "filter folders",
+				"type": "Filter",
+				"dependsOn": [
+					{
+						"activity": "List folders",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('List folders').output.childItems",
+						"type": "Expression"
+					},
+					"condition": {
+						"value": "@equals(item().type, 'Folder')",
+						"type": "Expression"
+					}
 				}
 			}
 		],
