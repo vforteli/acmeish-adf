@@ -48,9 +48,10 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity('List files').output.childItems",
+						"value": "@activity('filter folders').output",
 						"type": "Expression"
 					},
+					"isSequential": false,
 					"activities": [
 						{
 							"name": "Handle file",
