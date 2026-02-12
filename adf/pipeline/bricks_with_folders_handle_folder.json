@@ -1,9 +1,9 @@
 {
-	"name": "bricks_with_folders_list_folders",
+	"name": "bricks_with_folders_handle_folder",
 	"properties": {
 		"activities": [
 			{
-				"name": "List folders",
+				"name": "List files",
 				"type": "GetMetadata",
 				"dependsOn": [],
 				"policy": {
@@ -19,7 +19,10 @@
 						"referenceName": "bricks_with_folders_source",
 						"type": "DatasetReference",
 						"parameters": {
-							"file_path": "/"
+							"file_path": {
+								"value": "@pipeline().parameters.folder_path",
+								"type": "Expression"
+							}
 						}
 					},
 					"fieldList": [
@@ -35,11 +38,11 @@
 				}
 			},
 			{
-				"name": "Foreach folder",
+				"name": "Foreach file",
 				"type": "ForEach",
 				"dependsOn": [
 					{
-						"activity": "filter folders",
+						"activity": "filter files",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -48,7 +51,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity('filter folders').output.value",
+						"value": "@activity('filter files').output.value",
 						"type": "Expression"
 					},
 					"isSequential": false,
@@ -63,27 +66,21 @@
 							"userProperties": [],
 							"typeProperties": {
 								"pipeline": {
-									"referenceName": "bricks_with_folders_handle_folder",
+									"referenceName": "noop_pipeline",
 									"type": "PipelineReference"
 								},
-								"waitOnCompletion": true,
-								"parameters": {
-									"folder_path": {
-										"value": "@item().value",
-										"type": "Expression"
-									}
-								}
+								"waitOnCompletion": true
 							}
 						}
 					]
 				}
 			},
 			{
-				"name": "filter folders",
+				"name": "filter files",
 				"type": "Filter",
 				"dependsOn": [
 					{
-						"activity": "List folders",
+						"activity": "List files",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -92,16 +89,21 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity('List folders').output.childItems",
+						"value": "@activity('List files').output.childItems",
 						"type": "Expression"
 					},
 					"condition": {
-						"value": "@equals(item().type, 'Folder')",
+						"value": "@equals(item().type, 'File')",
 						"type": "Expression"
 					}
 				}
 			}
 		],
+		"parameters": {
+			"folder_path": {
+				"type": "string"
+			}
+		},
 		"folder": {
 			"name": "repeish/bricks_with_folders"
 		},
