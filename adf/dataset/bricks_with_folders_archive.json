@@ -13,7 +13,9 @@
 		"folder": {
 			"name": "repeish/bricks_with_folders"
 		},
-		"annotations": [],
+		"annotations": [
+			"subfolders"
+		],
 		"type": "Binary",
 		"typeProperties": {
 			"location": {
