@@ -55,7 +55,7 @@
 					"isSequential": false,
 					"activities": [
 						{
-							"name": "Handle file",
+							"name": "Handle folder",
 							"type": "ExecutePipeline",
 							"dependsOn": [],
 							"policy": {
