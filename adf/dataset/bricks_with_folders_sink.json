@@ -13,7 +13,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"folderPath": "in/bricks",
+				"folderPath": "in/bricks_with_folders",
 				"fileSystem": "repeish"
 			}
 		}
