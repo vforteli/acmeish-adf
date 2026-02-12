@@ -1,0 +1,77 @@
+{
+	"name": "bricks_with_folders_list_folders",
+	"properties": {
+		"activities": [
+			{
+				"name": "List files",
+				"type": "GetMetadata",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "bricks_with_folders_source",
+						"type": "DatasetReference"
+					},
+					"fieldList": [
+						"childItems"
+					],
+					"storeSettings": {
+						"type": "AzureBlobStorageReadSettings",
+						"enablePartitionDiscovery": false
+					},
+					"formatSettings": {
+						"type": "BinaryReadSettings"
+					}
+				}
+			},
+			{
+				"name": "Foreach file",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "List files",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('List files').output.childItems",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Handle file",
+							"type": "ExecutePipeline",
+							"dependsOn": [],
+							"policy": {
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "noop_pipeline",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true
+							}
+						}
+					]
+				}
+			}
+		],
+		"folder": {
+			"name": "repeish/bricks_with_folders"
+		},
+		"annotations": []
+	}
+}
