@@ -1,0 +1,21 @@
+{
+	"name": "bricks_with_folders_sink",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "repeish/bricks_with_folders"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "in/bricks",
+				"fileSystem": "repeish"
+			}
+		}
+	}
+}
