@@ -64,10 +64,17 @@
 							"userProperties": [],
 							"typeProperties": {
 								"pipeline": {
-									"referenceName": "noop_pipeline",
+									"referenceName": "bricks_with_folders_handle_file",
 									"type": "PipelineReference"
 								},
-								"waitOnCompletion": true
+								"waitOnCompletion": true,
+								"parameters": {
+									"folder_path": "@pipeline().parameters.folder_path",
+									"file_name": {
+										"value": "@item().name",
+										"type": "Expression"
+									}
+								}
 							}
 						}
 					]
