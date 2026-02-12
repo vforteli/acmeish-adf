@@ -63,7 +63,17 @@
 				"outputs": [
 					{
 						"referenceName": "bricks_with_folders_sink",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"file_name": {
+								"value": "@pipeline().parameters.file_name",
+								"type": "Expression"
+							},
+							"folder_path": {
+								"value": "@pipeline().parameters.folder_path",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			},
