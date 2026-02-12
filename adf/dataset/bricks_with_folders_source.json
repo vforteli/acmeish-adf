@@ -8,6 +8,9 @@
 		"parameters": {
 			"file_path": {
 				"type": "string"
+			},
+			"folder_path": {
+				"type": "string"
 			}
 		},
 		"folder": {
@@ -22,7 +25,10 @@
 					"value": "@dataset().file_path",
 					"type": "Expression"
 				},
-				"folderPath": "out/bricks_with_folders",
+				"folderPath": {
+					"value": "@concat('out/bricks_with_folders', dataset().folder_path)",
+					"type": "Expression"
+				},
 				"fileSystem": "repeish"
 			}
 		}

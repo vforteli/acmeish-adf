@@ -19,7 +19,8 @@
 						"referenceName": "bricks_with_folders_source",
 						"type": "DatasetReference",
 						"parameters": {
-							"file_path": "/"
+							"file_path": "/",
+							"folder_path": "/"
 						}
 					},
 					"fieldList": [
