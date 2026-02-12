@@ -69,7 +69,7 @@
 								"waitOnCompletion": true,
 								"parameters": {
 									"folder_path": {
-										"value": "@item().value",
+										"value": "@item().name",
 										"type": "Expression"
 									}
 								}
