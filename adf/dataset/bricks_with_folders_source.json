@@ -26,7 +26,7 @@
 					"type": "Expression"
 				},
 				"folderPath": {
-					"value": "@concat('out/bricks_with_folders', dataset().folder_path)",
+					"value": "@concat('out/bricks_with_folders/', dataset().folder_path)",
 					"type": "Expression"
 				},
 				"fileSystem": "repeish"
