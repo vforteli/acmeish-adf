@@ -3,20 +3,143 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Execute Pipeline1",
-				"type": "ExecutePipeline",
+				"name": "Copy data to sink",
+				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": [],
-				"typeProperties": {
-					"pipeline": {
-						"referenceName": "noop_pipeline",
-						"type": "PipelineReference"
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "repeish/out/bricks/@{pipeline().parameters.source_file_name}"
 					},
-					"waitOnCompletion": true
-				}
+					{
+						"name": "Destination",
+						"value": "repeish/in/bricks/"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "BinarySource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": false,
+							"deleteFilesAfterCompletion": false
+						},
+						"formatSettings": {
+							"type": "BinaryReadSettings"
+						}
+					},
+					"sink": {
+						"type": "BinarySink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings",
+							"copyBehavior": "PreserveHierarchy"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "bricks_with_folders_source",
+						"type": "DatasetReference",
+						"parameters": {
+							"file_path": {
+								"value": "@pipeline().parameters.file_name",
+								"type": "Expression"
+							},
+							"folder_path": {
+								"value": "@pipeline().parameters.folder_path",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "bricks_with_folders_sink",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Move to archive",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Copy data to sink",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "repeish/out/bricks/@{pipeline().parameters.source_file_name}"
+					},
+					{
+						"name": "Destination",
+						"value": "repeish/out/bricks_archive/@{concat(utcNow('yyyyMMddHHmm'), '_', pipeline().parameters.source_file_name)}"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "BinarySource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": false,
+							"deleteFilesAfterCompletion": false
+						},
+						"formatSettings": {
+							"type": "BinaryReadSettings"
+						}
+					},
+					"sink": {
+						"type": "BinarySink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "bricks_with_folders_source",
+						"type": "DatasetReference",
+						"parameters": {
+							"file_path": {
+								"value": "@pipeline().parameters.file_name",
+								"type": "Expression"
+							},
+							"folder_path": {
+								"value": "@pipeline().parameters.folder_path",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "bricks_archive",
+						"type": "DatasetReference",
+						"parameters": {
+							"file_path": "@concat(utcNow('yyyyMMddHHmm'), '_', pipeline().parameters.source_file_name)"
+						}
+					}
+				]
 			}
 		],
 		"parameters": {
