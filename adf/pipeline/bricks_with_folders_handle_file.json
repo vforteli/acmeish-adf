@@ -49,7 +49,7 @@
 						"referenceName": "bricks_with_folders_source",
 						"type": "DatasetReference",
 						"parameters": {
-							"file_path": {
+							"file_name": {
 								"value": "@pipeline().parameters.file_name",
 								"type": "Expression"
 							},
@@ -131,7 +131,7 @@
 						"referenceName": "bricks_with_folders_source",
 						"type": "DatasetReference",
 						"parameters": {
-							"file_path": {
+							"file_name": {
 								"value": "@pipeline().parameters.file_name",
 								"type": "Expression"
 							},
