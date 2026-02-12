@@ -134,10 +134,13 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "bricks_archive",
+						"referenceName": "bricks_with_folders_archive",
 						"type": "DatasetReference",
 						"parameters": {
-							"file_path": "@concat(utcNow('yyyyMMddHHmm'), '_', pipeline().parameters.source_file_name)"
+							"file_path": {
+								"value": "@concat(pipeline().parameters.folder_path, '/',utcNow('yyyyMMddHHmm'), '_',  pipeline().parameters.file_name)",
+								"type": "Expression"
+							}
 						}
 					}
 				]

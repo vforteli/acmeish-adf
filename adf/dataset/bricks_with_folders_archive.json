@@ -1,0 +1,30 @@
+{
+	"name": "bricks_with_folders_archive",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"file_path": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "repeish/bricks_with_folders"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().file_path",
+					"type": "Expression"
+				},
+				"folderPath": "out/bricks_with_folders_archive",
+				"fileSystem": "repeish"
+			}
+		}
+	}
+}
